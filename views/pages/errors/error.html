@@ -1,0 +1,46 @@
+<div class="container-err">
+  <h1 class="error-code">{{.ErrorCode}}</h1>
+  <h2 class="error-message">{{.Message}}</h2>
+  <div class="icon-container">
+    <div class="particles">
+      <div class="particle" style="width: 10px; height: 10px; left: 20%; top: 30%;"></div>
+      <div class="particle" style="width: 15px; height: 15px; left: 80%; top: 60%;"></div>
+      <div class="particle" style="width: 8px; height: 8px; left: 40%; top: 40%;"></div>
+      <div class="particle" style="width: 12px; height: 12px; left: 60%; top: 70%;"></div>
+      <div class="particle" style="width: 6px; height: 6px; left: 50%; top: 20%;"></div>
+    </div>
+  </div>
+
+  <a href="/" class="button">Return to Home</a>
+</div>
+
+<script>
+  // Add some interactivity to our 404 page
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const simulation = document.querySelector('.simulation');
+
+    simulation.addEventListener('mousemove', (e) => {
+      const rect = simulation.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const particles = document.querySelectorAll('.particle');
+      particles.forEach((particle, index) => {
+        const speed = 0.5 - (index * 0.1);
+        particle.style.transform = `translate(${(x - 150) * speed}px, ${(y - 150) * speed}px)`;
+      });
+    });
+
+    // Add more particles dynamically
+    for (let i = 0; i < 10; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.style.width = `${Math.random() * 10 + 5}px`;
+      particle.style.height = particle.style.width;
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
+      particle.style.animationDelay = `${Math.random() * 4}s`;
+      document.querySelector('.particles').appendChild(particle);
+    }
+  });
+</script>
